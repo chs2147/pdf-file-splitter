@@ -130,6 +130,27 @@
 
 ---
 
+## 2026-07-06 — Vercel 신규 프로젝트 배포
+
+### 배경
+- 배포처로 GitHub Pages와 Vercel을 비교. 이 프로젝트가 서버 없는 순수
+  클라이언트 사이드 Vite/React 앱이라 둘 다 가능하지만, GitHub Pages는
+  `vite.config.ts`의 `base` 경로 수정과 별도 배포 워크플로우 구성이
+  필요한 반면 Vercel은 저장소 연결만으로 프레임워크 자동 감지·빌드가
+  되고 PR 프리뷰 배포도 제공되어 Vercel로 결정.
+
+### 변경 내용
+- Vercel CLI(`npx vercel deploy --prod --yes`)로 신규 프로젝트 생성 및
+  배포. GitHub 저장소(`chs2147/pdf-file-splitter`)와 자동 연동되어 이후
+  `main` 브랜치 push 시 자동 재배포됨.
+- 프로젝트: `leslie-jins-projects/pdf-file-splitter`
+- Production URL: https://pdf-file-splitter.vercel.app
+
+### 검증
+- `curl`로 프로덕션 URL과 `/favicon.svg` 응답 코드가 각각 200임을 확인.
+
+---
+
 ## 작성 규칙
 - 이후 모든 코드 변경, 기능 추가/수정, 버그 수정은 이 파일 하단에 날짜별로 追記한다.
 - 각 항목은 `## YYYY-MM-DD — 제목` 형식으로 구분하고, 변경 배경(왜)과 변경 내용(무엇)을
