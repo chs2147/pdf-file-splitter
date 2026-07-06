@@ -89,78 +89,75 @@ export default function App() {
     : 'split.zip'
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <header className="mb-8 flex items-center gap-3">
-        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-primary text-white">
-          <Scissors size={22} />
+    <div className="min-h-full bg-brand-black">
+      <div className="mx-auto max-w-3xl px-4 py-16">
+        <header className="mb-12 flex items-center gap-4 border-b border-brand-line pb-8">
+          <Scissors size={32} className="text-brand-white" />
+          <h1 className="font-display text-4xl uppercase tracking-[0.08em] text-brand-white">
+            PDF File Splitter
+          </h1>
+        </header>
+
+        <div className="space-y-8">
+          <FileDropzone
+            file={file}
+            pageCount={pageCount}
+            onSelect={handleSelect}
+            onClear={handleClear}
+            disabled={busy}
+          />
+
+          {file && (
+            <>
+              <section>
+                <h2 className="mb-4 font-display text-lg uppercase tracking-[0.2em] text-brand-silver">
+                  분할 기준
+                </h2>
+                <SplitOptions
+                  value={options}
+                  onChange={setOptions}
+                  disabled={busy}
+                  totalPages={pageCount}
+                />
+              </section>
+
+              <button
+                type="button"
+                onClick={handleSplit}
+                disabled={busy || pageCount == null}
+                className="inline-flex w-full items-center justify-center gap-2 border border-brand-white bg-brand-white px-4 py-4 font-display text-lg uppercase tracking-[0.15em] text-brand-black transition hover:bg-transparent hover:text-brand-white disabled:cursor-not-allowed disabled:border-brand-line disabled:bg-transparent disabled:text-brand-silver"
+              >
+                {busy ? (
+                  <>
+                    <Loader2 size={20} className="animate-spin" />
+                    분할 중… {progress}%
+                  </>
+                ) : (
+                  <>
+                    <Scissors size={20} />
+                    PDF 분할하기
+                  </>
+                )}
+              </button>
+            </>
+          )}
+
+          {error && (
+            <div className="flex items-start gap-2 border border-amber-500/30 bg-amber-500/10 p-4 text-sm text-amber-400">
+              <AlertCircle size={18} className="mt-0.5 shrink-0" />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {parts && parts.length > 0 && (
+            <ResultList parts={parts} zipName={zipName} />
+          )}
         </div>
-        <div>
-          <h1 className="text-2xl font-bold text-slate-900">PDF File Splitter</h1>
-          <p className="text-sm text-slate-500">
-            PDF를 용량 또는 페이지 기준으로 여러 파일로 분할합니다.
-          </p>
-        </div>
-      </header>
 
-      <div className="space-y-6">
-        <FileDropzone
-          file={file}
-          pageCount={pageCount}
-          onSelect={handleSelect}
-          onClear={handleClear}
-          disabled={busy}
-        />
-
-        {file && (
-          <>
-            <section>
-              <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-500">
-                분할 기준
-              </h2>
-              <SplitOptions
-                value={options}
-                onChange={setOptions}
-                disabled={busy}
-                totalPages={pageCount}
-              />
-            </section>
-
-            <button
-              type="button"
-              onClick={handleSplit}
-              disabled={busy || pageCount == null}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand-secondary px-4 py-3 font-semibold text-white shadow-sm transition hover:bg-brand-secondary/90 disabled:cursor-not-allowed disabled:opacity-50"
-            >
-              {busy ? (
-                <>
-                  <Loader2 size={20} className="animate-spin" />
-                  분할 중… {progress}%
-                </>
-              ) : (
-                <>
-                  <Scissors size={20} />
-                  PDF 분할하기
-                </>
-              )}
-            </button>
-          </>
-        )}
-
-        {error && (
-          <div className="flex items-start gap-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-            <AlertCircle size={18} className="mt-0.5 shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
-
-        {parts && parts.length > 0 && (
-          <ResultList parts={parts} zipName={zipName} />
-        )}
+        <footer className="mt-16 border-t border-brand-line pt-6 text-center text-xs uppercase tracking-[0.2em] text-brand-silver">
+          모든 처리는 브라우저에서 이루어집니다 · pdf-lib 기반
+        </footer>
       </div>
-
-      <footer className="mt-12 text-center text-xs text-slate-400">
-        모든 처리는 브라우저에서 이루어집니다 · pdf-lib 기반
-      </footer>
     </div>
   )
 }

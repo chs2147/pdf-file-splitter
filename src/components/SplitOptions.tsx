@@ -63,34 +63,34 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
               type="button"
               disabled={disabled}
               onClick={() => set({ criterion: c.kind })}
-              className={`flex items-start gap-3 rounded-xl border p-4 text-left transition disabled:opacity-50 ${
+              className={`flex items-start gap-3 border p-4 text-left transition disabled:opacity-50 ${
                 active
-                  ? 'border-brand-secondary bg-brand-secondary/5 ring-1 ring-brand-secondary'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
+                  ? 'border-brand-white bg-brand-charcoal'
+                  : 'border-brand-line bg-brand-black hover:border-brand-silver'
               }`}
             >
               <span
                 className={`mt-0.5 ${
-                  active ? 'text-brand-secondary' : 'text-slate-400'
+                  active ? 'text-brand-white' : 'text-brand-silver'
                 }`}
               >
                 {c.icon}
               </span>
               <span>
-                <span className="block font-medium text-slate-800">
+                <span className="block font-medium text-brand-white">
                   {c.title}
                 </span>
-                <span className="block text-sm text-slate-500">{c.desc}</span>
+                <span className="block text-sm text-brand-silver">{c.desc}</span>
               </span>
             </button>
           )
         })}
       </div>
 
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
+      <div className="border border-brand-line bg-brand-charcoal p-4">
         {value.criterion === 'size' && (
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">
+            <span className="text-sm font-medium text-brand-white">
               파일당 최대 용량 (MB)
             </span>
             <input
@@ -102,9 +102,9 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
               onChange={(e) =>
                 set({ maxMB: Math.max(1, Number(e.target.value) || 1) })
               }
-              className="mt-1 w-40 rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-brand-secondary focus:ring-1 focus:ring-brand-secondary disabled:bg-slate-100"
+              className="mt-1 w-40 border border-brand-line bg-brand-black px-3 py-2 text-brand-white outline-none focus:border-brand-white disabled:opacity-50"
             />
-            <span className="mt-1 block text-sm text-slate-500">
+            <span className="mt-1 block text-sm text-brand-silver">
               각 분할 파일이 이 용량을 넘지 않도록 페이지 순서대로 묶습니다.
             </span>
           </label>
@@ -112,7 +112,7 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
 
         {value.criterion === 'everyN' && (
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">
+            <span className="text-sm font-medium text-brand-white">
               파일당 페이지 수
             </span>
             <input
@@ -124,10 +124,10 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
               onChange={(e) =>
                 set({ pagesPerFile: Math.max(1, Number(e.target.value) || 1) })
               }
-              className="mt-1 w-40 rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-brand-secondary focus:ring-1 focus:ring-brand-secondary disabled:bg-slate-100"
+              className="mt-1 w-40 border border-brand-line bg-brand-black px-3 py-2 text-brand-white outline-none focus:border-brand-white disabled:opacity-50"
             />
             {totalPages != null && (
-              <span className="mt-1 block text-sm text-slate-500">
+              <span className="mt-1 block text-sm text-brand-silver">
                 총 {totalPages} 페이지 →{' '}
                 {Math.ceil(totalPages / Math.max(1, value.pagesPerFile))}개 파일
               </span>
@@ -137,7 +137,7 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
 
         {value.criterion === 'ranges' && (
           <label className="block">
-            <span className="text-sm font-medium text-slate-700">
+            <span className="text-sm font-medium text-brand-white">
               페이지 범위
             </span>
             <input
@@ -146,9 +146,9 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
               disabled={disabled}
               placeholder="예: 1-3, 5, 8-10"
               onChange={(e) => set({ ranges: e.target.value })}
-              className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 outline-none focus:border-brand-secondary focus:ring-1 focus:ring-brand-secondary disabled:bg-slate-100"
+              className="mt-1 w-full border border-brand-line bg-brand-black px-3 py-2 text-brand-white outline-none focus:border-brand-white disabled:opacity-50"
             />
-            <span className="mt-1 block text-sm text-slate-500">
+            <span className="mt-1 block text-sm text-brand-silver">
               쉼표로 구분한 각 범위가 하나의 PDF가 됩니다.
               {totalPages != null && ` (총 ${totalPages} 페이지)`}
             </span>
@@ -156,7 +156,7 @@ export function SplitOptions({ value, onChange, disabled, totalPages }: Props) {
         )}
 
         {value.criterion === 'individual' && (
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-brand-silver">
             {totalPages != null
               ? `${totalPages}개의 페이지가 각각 별도의 PDF 파일로 분리됩니다.`
               : '모든 페이지가 각각 별도의 PDF 파일로 분리됩니다.'}

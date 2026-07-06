@@ -5,10 +5,16 @@ export default {
     extend: {
       colors: {
         brand: {
-          primary: '#003087',
-          secondary: '#0066CC',
-          accent: '#FF6B00',
+          black: '#050505',
+          charcoal: '#141414',
+          line: '#2a2a2a',
+          silver: '#9a9a9a',
+          white: '#f5f5f5',
         },
+      },
+      fontFamily: {
+        display: ['"Bebas Neue"', 'sans-serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Malgun Gothic', 'Apple SD Gothic Neo', 'sans-serif'],
       },
     },
   },
